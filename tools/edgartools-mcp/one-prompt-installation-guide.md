@@ -30,3 +30,21 @@ Do exactly this:
    - Claude config update status
    - HTTP pilot status (on/off)
 ```
+
+## Claude Simple Installation (Option for first-time Claude users)
+
+Add this directly to Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "edgartools": {
+      "command": "uvx",
+      "args": ["--from", "edgartools[ai]", "edgartools-mcp"],
+      "env": {
+        "EDGAR_IDENTITY": "Your Name your.email@example.com"
+      }
+    }
+  }
+}
+```
