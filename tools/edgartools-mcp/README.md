@@ -14,4 +14,5 @@ This package productizes EdgarTools as a Nazca MCP capability under:
 ## Additional assets
 - `one-prompt-installation-guide.md` — install prompt for Factory + Claude
 - `install-from-git.prompt.md` — install prompt for new machines from repo
+- `pdr-integration-handoff.md` — handoff hints for product-management droid
 - `http-wip/` — pilot HTTP structure

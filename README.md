@@ -49,6 +49,7 @@ Think of these skills as "lenses" you can put on your AI. Depending on the task 
 *   **PRD fit + roadmap:** `tools/edgartools-mcp/tool-description.md`
 *   **MCP config template:** `tools/edgartools-mcp/mcp-config.template.json`
 *   **Skill routing:** `tools/edgartools-mcp/skill-routing.md`
+*   **PDR integration handoff:** `tools/edgartools-mcp/pdr-integration-handoff.md`
 *   **HTTP pilot (WIP):** `tools/edgartools-mcp/http-wip/`
 
 ## 🚀 How to Use (Factory CLI)
