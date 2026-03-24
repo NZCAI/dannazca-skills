@@ -1,0 +1,1 @@
+export EDGAR_IDENTITY="Your Name your.email@example.com" && droid mcp add edgartools "uvx --from edgartools[ai] edgartools-mcp" --env EDGAR_IDENTITY="$EDGAR_IDENTITY"

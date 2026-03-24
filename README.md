@@ -39,6 +39,18 @@ Think of these skills as "lenses" you can put on your AI. Depending on the task 
 *   **When to use it:** Right before you deploy a new agent workflow to production.
 *   **Example Prompt:** *"Run the `universal-tester` against my local FastAPI webhook at http://localhost:8000/api/v1/chat."*
 
+## 🔌 Available MCP Tools
+
+### 1. `edgartools-mcp` (SEC EDGAR Intelligence)
+**What it does:** Adds SEC filing intelligence as MCP tools for investment workflows (10-K/10-Q/8-K analysis, insider transactions, comparisons, trends, and monitoring).
+*   **Where it is:** `tools/edgartools-mcp/`
+*   **Install guide:** `tools/edgartools-mcp/installation-guide.md`
+*   **One-prompt setup:** `tools/edgartools-mcp/one-prompt-installation-guide.md`
+*   **PRD fit + roadmap:** `tools/edgartools-mcp/tool-description.md`
+*   **MCP config template:** `tools/edgartools-mcp/mcp-config.template.json`
+*   **Skill routing:** `tools/edgartools-mcp/skill-routing.md`
+*   **HTTP pilot (WIP):** `tools/edgartools-mcp/http-wip/`
+
 ## 🚀 How to Use (Factory CLI)
 
 To utilize these skills locally, they must be placed in your Factory configuration directory.
