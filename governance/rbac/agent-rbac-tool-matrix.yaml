@@ -1,0 +1,149 @@
+---
+# Agent RBAC Matrix: Nazca AI Agents/Subagents
+# Version: 1.0
+# Date: 2026-03-24
+
+product: "Nazca AI Agents"
+version: "1.0"
+scope: "Product Manager, Code-Reviewer, AI-Data-Analyst agents"
+
+agents:
+  product_manager:
+    description: "AI agent managing roadmap, requirements, dependency risk"
+    type: "coordinator"
+
+  code_reviewer:
+    description: "AI agent reviewing code pre-commit"
+    type: "reviewer"
+
+  ai_data_analyst:
+    description: "AI agent extracting data and creating analysis reports"
+    type: "analyst"
+
+rbac_matrix:
+  product_manager:
+    access_points:
+      - name: "PRD Repository"
+        permission: "read/write"
+        scope: "Roadmap docs, requirements, version control"
+        audit_log: true
+
+      - name: "Dependency Tracking"
+        permission: "read/write"
+        scope: "Track dependencies, flag risks"
+        audit_log: true
+
+      - name: "Roadmap Updates"
+        permission: "propose"
+        scope: "Suggest roadmap changes (requires admin approval)"
+        approval_required: true
+
+    restrictions:
+      - "Cannot deploy code"
+      - "Cannot execute trades/live actions"
+      - "Roadmap changes require admin sign-off"
+
+  code_reviewer:
+    access_points:
+      - name: "Source Code"
+        permission: "read"
+        scope: "All repos, branches, commits"
+        audit_log: false
+
+      - name: "PR Metadata"
+        permission: "read/write"
+        scope: "View PR, comment, request changes"
+        audit_log: true
+
+      - name: "Code Quality Checks"
+        permission: "read/execute"
+        scope: "Run linters, type checkers, tests"
+        audit_log: false
+
+    restrictions:
+      - "Cannot approve merges (humans do that)"
+      - "Cannot push commits"
+      - "Cannot deploy code"
+      - "Comments/reviews only"
+
+  ai_data_analyst:
+    access_points:
+      - name: "mcp-edgartools"
+        permission: "execute"
+        query_types:
+          - company_name_search
+          - ticker_lookup
+          - cik_lookup
+          - sec_filings
+          - fulltext_10k_search
+          - fulltext_10q_search
+        audit_log: true
+
+      - name: "Dropbox MCP"
+        permission: "read"
+        scope: "Browse documents, extract text"
+        audit_log: false
+
+      - name: "Notion MCP"
+        permission: "read"
+        scope: "Query databases, read pages"
+        audit_log: false
+
+      - name: "Postgres (read-only)"
+        permission: "read"
+        scope: "Query historical data, market snapshots"
+        audit_log: false
+
+      - name: "Report Generation"
+        permission: "write"
+        scope: "Create markdown/PDF reports, save to S3"
+        audit_log: true
+
+    restrictions:
+      - "Edgar: no insider holdings queries (Data Scientist or admin only)"
+      - "Postgres: read-only (no writes)"
+      - "Dropbox/Notion: read-only"
+      - "Cannot execute trades or live actions"
+
+high_risk_operations:
+  - operation: "ai_data_analyst queries Edgar"
+    audit_log: true
+    tracking: "Query type, results, timestamp, purpose"
+    restriction: "Cannot query insider holdings"
+
+  - operation: "code_reviewer comments on sensitive code"
+    audit_log: true
+    tracking: "File, comments, timestamp"
+
+  - operation: "product_manager proposes roadmap change"
+    approval: "Requires admin approval"
+    audit_log: true
+
+governance:
+  agent_invocation: "Via slash command or prompt (user controls when)"
+  approval_workflow: "Admin oversight of agent suggestions"
+  audit_log_retention: "2 years"
+  escalation: "If agent suggests unsafe action, block + notify admin"
+
+deployment:
+  effective_date: "2026-03-24"
+  agents:
+    - name: "Product Manager"
+      status: "ready"
+      approval_gate: "Admin approval required for roadmap commits"
+
+    - name: "Code-Reviewer"
+      status: "ready"
+      approval_gate: "No gate (comments only, humans approve merges)"
+
+    - name: "AI-Data-Analyst"
+      status: "ready"
+      approval_gate: "No gate (read-only queries + report generation)"
+
+notes: |
+  - All agents are invoked by you (user controls when)
+  - Agents cannot override human decisions
+  - Agents log all high-risk operations
+  - Agents respect MCP/data boundaries
+  - No agent can execute live trades or AWS infrastructure changes
+  - Agents can suggest, analyze, review — but cannot approve/deploy

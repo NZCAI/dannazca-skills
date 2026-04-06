@@ -1,0 +1,283 @@
+---
+# Team RBAC Matrix: Nazca Human Roles
+# Version: 2.0-data-centric
+# Date: 2026-03-24
+
+product: "Nazca Data Analysis System"
+version: "2.0"
+scope: "Human team roles (Admin, Data Scientist, ML Trainee, Auto Trainee, Analyst, Partner)"
+
+roles:
+  admin:
+    description: "Head of AI, full system oversight, AWS access"
+    level: 1
+    inherits_from: null
+
+  data_scientist:
+    description: "Data automation, Edgar queries, S3 uploads, Postgres access"
+    level: 2
+    inherits_from: admin
+    note: "Full MCP access, S3 only (not full AWS)"
+
+  ml_trainee:
+    description: "ML/data science work: SageMaker, Lambda, S3, Postgres"
+    level: 2
+    inherits_from: data_scientist
+    note: "AWS ML services only"
+
+  automations_trainee:
+    description: "n8n automation design, maintenance, documentation"
+    level: 2
+    inherits_from: null
+    note: "Independent path, no MCP access"
+
+  analyst:
+    description: "Investment analyst, UI only, ticket-based requests"
+    level: 0
+    inherits_from: null
+
+  partner:
+    description: "Firm partner, system health + metrics read-only"
+    level: 0
+    inherits_from: null
+
+rbac_matrix:
+  admin:
+    n8n:
+      read: true
+      execute: true
+      write: true
+      configure: true
+      audit_log: true
+
+    mcp_edgartools:
+      read: true
+      execute: true
+      write: true
+      configure: true
+      audit_log: true
+
+    postgres:
+      read: true
+      execute: true
+      write: true
+      configure: true
+      audit_log: true
+
+    s3:
+      read: true
+      write: true
+      configure: true
+      audit_log: true
+
+    lambda:
+      read: true
+      execute: true
+      write: true
+      configure: true
+      audit_log: true
+
+    sagemaker:
+      read: true
+      execute: true
+      write: true
+      configure: true
+      audit_log: true
+
+    ui:
+      full_access: true
+
+  data_scientist:
+    n8n:
+      read: true
+      execute: true
+      write: false
+      restrictions: "Execute automation flows, cannot modify n8n internals"
+      audit_log: true
+
+    mcp_edgartools:
+      read: true
+      execute: true
+      write: false
+      restrictions: "Query Edgar data, run SEC searches"
+      audit_log: true
+
+    postgres:
+      read: true
+      execute: true
+      write: true
+      restrictions: "Read/write analytical queries, update data in Aurora/RDS"
+      audit_log: true
+
+    s3:
+      read: true
+      write: true
+      restrictions: "Upload processed data, download datasets"
+      audit_log: true
+
+    lambda:
+      read: false
+      restrictions: "No Lambda access (ML Trainee handles)"
+
+    sagemaker:
+      read: false
+      restrictions: "No SageMaker access (ML Trainee handles)"
+
+    ui:
+      analyst_mode: true
+
+  ml_trainee:
+    n8n:
+      read: false
+      restrictions: "No n8n access (Data Scientist handles)"
+
+    mcp_edgartools:
+      read: false
+      restrictions: "No Edgar access (Data Scientist handles)"
+
+    postgres:
+      read: true
+      execute: true
+      write: true
+      restrictions: "Read/write for ML metadata, results, model versions"
+      audit_log: true
+
+    s3:
+      read: true
+      write: true
+      restrictions: "Upload models, datasets, training artifacts"
+      audit_log: true
+
+    lambda:
+      read: true
+      execute: true
+      write: true
+      restrictions: "Deploy inference functions, test endpoints"
+      audit_log: true
+
+    sagemaker:
+      read: true
+      execute: true
+      write: true
+      restrictions: "Full SageMaker access for training, deployment, tuning"
+      audit_log: true
+
+    ui:
+      analyst_mode: true
+
+  automations_trainee:
+    n8n:
+      read: true
+      execute: true
+      write: true
+      restrictions: "Design flows, maintain, test, authorized to push updates"
+      audit_log: true
+
+    mcp_edgartools:
+      read: false
+      restrictions: "Data Scientist handles Edgar"
+
+    postgres:
+      read: false
+      restrictions: "No direct DB access (Data Scientist handles)"
+
+    s3:
+      read: false
+      restrictions: "No S3 access"
+
+    lambda:
+      read: false
+      restrictions: "No Lambda access"
+
+    sagemaker:
+      read: false
+      restrictions: "No SageMaker access"
+
+    ui:
+      analyst_mode: true
+
+  analyst:
+    n8n:
+      read: false
+
+    mcp_edgartools:
+      read: false
+
+    postgres:
+      read: false
+
+    s3:
+      read: false
+
+    lambda:
+      read: false
+
+    sagemaker:
+      read: false
+
+    ui:
+      analyst_mode: true
+      restrictions: "View dashboards, request data via tickets"
+
+  partner:
+    n8n:
+      read: false
+
+    mcp_edgartools:
+      read: false
+
+    postgres:
+      read: false
+
+    s3:
+      read: false
+
+    lambda:
+      read: false
+
+    sagemaker:
+      read: false
+
+    ui:
+      system_health: true
+      code_review_scores: true
+      readiness_metrics: true
+      token_usage: true
+      restrictions: "Read-only, no modifications"
+
+high_risk_operations:
+  - operation: "S3 upload by Data Scientist"
+    audit_log: true
+    tracking: "Data lineage, timestamp, user, file size"
+
+  - operation: "Edgar query by AI-Data-Analyst"
+    audit_log: true
+    tracking: "Query type, results count, user, timestamp"
+
+  - operation: "n8n push by Automations Trainee"
+    approval: "Requires 2-approver gate (admin + peer review)"
+    audit_log: true
+
+  - operation: "AWS config change by Admin"
+    audit_log: true
+    tracking: "All permission/security-related changes"
+
+governance:
+  approval_workflow: "GitHub PR + CODEOWNERS"
+  audit_log_retention: "2 years"
+  escalation_method: "Issue ticket → Approval → Config change"
+  version_control: "Git governance repo"
+
+deployment:
+  effective_date: "2026-03-24"
+  pilot_teams:
+    - "Immediate: Data Scientist"
+    - "Week 2: ML Trainee, Automations Trainee"
+    - "Week 3: Analyst, Partner"
+
+notes: |
+  - Data Scientist is NOT full AWS access (only S3, no Lambda/SageMaker/EC2)
+  - ML Trainee is NOT MCP access (only AWS ML suite)
+  - Analyst interacts ONLY via UI
+  - Partner can view system health but not modify anything
+  - All high-risk ops logged for compliance + operational visibility
