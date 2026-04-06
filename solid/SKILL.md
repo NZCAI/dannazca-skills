@@ -1,6 +1,24 @@
 ---
 name: solid
+version: 1.0.0
+status: foundational
 description: Use this skill when writing code, implementing features, refactoring, planning architecture, designing systems, reviewing code, or debugging. This skill transforms junior-level code into senior-engineer quality software through SOLID principles, TDD, clean code practices, and professional software design.
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Grep
+  - Glob
+related-skills:
+  - tracer-bullets
+  - product-management
+tags:
+  - software-engineering
+  - testing
+  - architecture
+  - code-quality
+  - design-patterns
 ---
 
 # Solid Skills: Professional Software Engineering

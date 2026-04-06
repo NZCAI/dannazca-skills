@@ -1,6 +1,23 @@
 ---
 name: ai-data-analyst
+version: 1.0.0
+status: mature
 description: Perform comprehensive data analysis, statistical modeling, and data visualization by writing and executing self-contained Python scripts. Use when you need to analyze datasets, perform statistical tests, create visualizations, or build predictive models with reproducible, code-based workflows.
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+related-skills:
+  - product-management
+  - data-querying
+  - tidy-data-framework
+tags:
+  - data-analysis
+  - statistical-modeling
+  - data-visualization
+  - python
+  - machine-learning
 ---
 # Skill: AI data analyst
 

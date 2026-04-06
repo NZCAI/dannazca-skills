@@ -1,6 +1,22 @@
 ---
 name: service-integration
+version: 1.0.0
+status: minimal
 description: Extend or wire backend services in a shared monorepo while respecting ownership boundaries, observability, and rollout safeguards.
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+related-skills:
+  - solid
+  - internal-tools
+tags:
+  - backend-development
+  - service-architecture
+  - observability
+  - integration-testing
+  - rollout-safeguards
 ---
 
 # Service Integration

@@ -1,6 +1,19 @@
 ---
 name: browser
+version: 1.0.0
+status: minimal
 description: Minimal Chrome DevTools Protocol tools for browser automation and scraping. Use when you need to start Chrome, navigate pages, execute JavaScript, take screenshots, or interactively pick DOM elements.
+allowed-tools:
+  - Bash
+  - Read
+related-skills:
+  - frontend-ui-integration
+  - service-integration
+tags:
+  - browser-automation
+  - web-scraping
+  - chrome-devtools
+  - testing
 ---
 
 # Browser Tools

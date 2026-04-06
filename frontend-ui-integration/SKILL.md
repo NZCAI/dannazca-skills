@@ -1,6 +1,23 @@
 ---
 name: frontend-ui-integration
+version: 1.0.0
+status: minimal
 description: Implement typed frontend flows backed by existing APIs while following the design system, routing rules, and test coverage requirements.
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+related-skills:
+  - solid
+  - service-integration
+  - browser
+tags:
+  - frontend-development
+  - react
+  - typescript
+  - component-design
+  - testing
 ---
 
 # Frontend UI Integration

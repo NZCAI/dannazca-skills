@@ -1,6 +1,21 @@
 ---
 name: tracer-bullets
+version: 1.0.0
+status: minimal
 description: Build features in tracer bullets (tiny end-to-end slices) to prevent overbuilding and force early feedback.
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+related-skills:
+  - solid
+  - product-management
+tags:
+  - development-methodology
+  - feature-engineering
+  - agile
+  - feedback-loops
 ---
 
 ## Tracer Bullets

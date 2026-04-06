@@ -1,6 +1,23 @@
 ---
 name: product-management
+version: 1.0.0
+status: mature
 description: Assist with core product management activities including writing PRDs, analyzing features, synthesizing user research, planning roadmaps, and communicating product decisions. Use when you need help with PM documentation, analysis, or planning workflows that integrate with your codebase.
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - AskUserQuestion
+related-skills:
+  - ai-data-analyst
+  - data-querying
+  - solid
+tags:
+  - product-management
+  - prds
+  - roadmaps
+  - feature-analysis
+  - user-research
 ---
 # Skill: Product management AI
 

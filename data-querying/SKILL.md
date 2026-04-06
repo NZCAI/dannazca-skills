@@ -1,6 +1,20 @@
 ---
 name: data-querying
+version: 1.0.0
+status: minimal
 description: Safely query internal analytics sources, producing reproducible notebooks, validated SQL, and documented insights.
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+related-skills:
+  - ai-data-analyst
+  - product-management
+tags:
+  - sql
+  - analytics
+  - data-warehousing
+  - reproducibility
 ---
 
 # Data Querying

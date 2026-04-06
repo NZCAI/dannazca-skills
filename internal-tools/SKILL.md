@@ -1,6 +1,23 @@
 ---
 name: internal-tools
+version: 1.0.0
+status: minimal
 description: Build or extend internal-facing tools with strong RBAC, audit logging, and operational safety nets.
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+related-skills:
+  - solid
+  - service-integration
+  - frontend-ui-integration
+tags:
+  - internal-tools
+  - admin-interfaces
+  - rbac
+  - audit-logging
+  - operational-safety
 ---
 
 # Internal Tools

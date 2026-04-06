@@ -1,6 +1,7 @@
 ---
 name: humanizer
 version: 2.2.0
+status: mature
 description: |
   Remove signs of AI-generated writing from text. Use when editing or reviewing
   text to make it sound more natural and human-written. Based on Wikipedia's
@@ -15,6 +16,14 @@ allowed-tools:
   - Grep
   - Glob
   - AskUserQuestion
+related-skills:
+  - product-management
+  - solid
+tags:
+  - writing
+  - editing
+  - ai-detection
+  - content-quality
 ---
 
 # Humanizer: Remove AI Writing Patterns

@@ -1,0 +1,39 @@
+# NAZCA Skills Repository Ownership
+# This file defines code ownership and review responsibilities for dannazca-skills
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Core foundational skills (all repos)
+/solid/ @admin @devops
+
+# Product & Governance
+/product-management/ @admin
+
+# AI & Machine Learning
+/humanizer/ @ai-team
+/ai-data-analyst/ @data-scientist
+/trading-analysis-framework/ @ai-team @trading-team
+
+# Data Engineering
+/data-querying/ @data-scientist
+/tidy-data-framework/ @data-scientist
+
+# Infrastructure & Tools
+/tools/ @devops @edgar-team
+/tools/edgartools-mcp/ @edgar-team
+/browser/ @tooling-team
+/frontend-ui-integration/ @frontend-team
+/service-integration/ @devops
+/internal-tools/ @devops
+
+# Experimental & Minimal
+/tracer-bullets/ @admin
+
+# Repository-level files
+README.md @admin
+CHANGELOG.md @admin
+.github/ @devops
+.github/workflows/ @devops
+tests/ @qa-team
+
+# Default fallback
+* @admin
