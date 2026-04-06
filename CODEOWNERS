@@ -3,37 +3,37 @@
 # See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Core foundational skills (all repos)
-/solid/ @admin @devops
+/solid/ @NZCD5L
 
 # Product & Governance
-/product-management/ @admin
+/product-management/ @NZCD5L
 
 # AI & Machine Learning
-/humanizer/ @ai-team
-/ai-data-analyst/ @data-scientist
-/trading-analysis-framework/ @ai-team @trading-team
+/humanizer/ @NZCD5L
+/ai-data-analyst/ @NZCD5L
+/trading-analysis-framework/ @NZCD5L
 
 # Data Engineering
-/data-querying/ @data-scientist
-/tidy-data-framework/ @data-scientist
+/data-querying/ @NZCD5L
+/tidy-data-framework/ @NZCD5L
 
 # Infrastructure & Tools
-/tools/ @devops @edgar-team
-/tools/edgartools-mcp/ @edgar-team
-/browser/ @tooling-team
-/frontend-ui-integration/ @frontend-team
-/service-integration/ @devops
-/internal-tools/ @devops
+/tools/ @NZCD5L
+/tools/edgartools-mcp/ @NZCD5L
+/browser/ @NZCD5L
+/frontend-ui-integration/ @NZCD5L
+/service-integration/ @NZCD5L
+/internal-tools/ @NZCD5L
 
 # Experimental & Minimal
-/tracer-bullets/ @admin
+/tracer-bullets/ @NZCD5L
 
 # Repository-level files
-README.md @admin
-CHANGELOG.md @admin
-.github/ @devops
-.github/workflows/ @devops
-tests/ @qa-team
+README.md @NZCD5L
+CHANGELOG.md @NZCD5L
+.github/ @NZCD5L
+.github/workflows/ @NZCD5L
+tests/ @NZCD5L
 
 # Default fallback
-* @admin
+* @NZCD5L
