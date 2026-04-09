@@ -6,6 +6,36 @@ This folder is the single source of truth for Nazca system governance, architect
 
 ---
 
+## Repository Ecosystem
+
+All active Nazca system repos — start here to navigate the codebase.
+
+| Repo | GitHub | Purpose | Status |
+|------|--------|---------|--------|
+| **dannazca-skills** | `NZCD5L/dannazca-skills` | Governance, RBAC policy, agent prompts, Intelligence Desk docs | ✅ Active |
+| **fastapi-bridge** | `NZCD5L/fastapi-bridge` | Universal API gateway — auth, RBAC, job tracking, MCP routing | ✅ Checkpoint 2 |
+| **TradingAgents** | `TauricResearch/TradingAgents` (`nazca-ui` branch) | Intelligence Desk UI — multi-agent stock analysis (Streamlit) | ✅ Stage 1 |
+
+```
+dannazca-skills (governance + skills)
+    └── governance/          ← you are here
+    └── trading-analysis-framework/
+          └── prompts/       ← 12 agent system prompts
+
+fastapi-bridge (API gateway)
+    └── app/
+          ├── agents/trading_orchestrator.py   ← LangGraph 12-agent graph
+          ├── workflows/pipeline_5a|5b.py      ← async pipeline runners
+          ├── jobs.py                          ← in-memory job store
+          └── edgar_client.py                 ← EdgarTools client
+
+TradingAgents (Intelligence Desk UI)
+    └── streamlit_app.py     ← nazca-ui branch (multi-ticker, export)
+    └── tradingagents/       ← TauricResearch execution engine
+```
+
+---
+
 ## Active Documents
 
 ### Architecture & Specification
