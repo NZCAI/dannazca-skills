@@ -117,6 +117,23 @@ TauricResearch lib         Job tracking + history     Slack /analyze command
 
 ---
 
+## API Rate Limits & Keys
+
+The tool depends on two external APIs. Both keys must be set in `/Users/dannazca/Factory/TradingAgents_Demo/.env`.
+
+| API | Key Name | Used For | Free Tier Limit | Impact |
+|-----|----------|----------|-----------------|--------|
+| OpenAI | `OPENAI_API_KEY` | All 8 LLM agents | Token-based billing | Analysis quality degrades if model is unavailable |
+| Alpha Vantage | `ALPHA_VANTAGE_API_KEY` | Stock data, news, fundamentals, indicators | **25 requests/day, 5 req/min** | Analysis fails with `AlphaVantageRateLimitError` if exceeded |
+
+**Alpha Vantage free tier is the primary constraint.** A single full 8-agent run on one ticker consumes multiple requests. Running 3 tickers in a sector sweep can exhaust the daily quota.
+
+**Symptoms when limit is hit:** Red error box in Streamlit UI — the error resets at midnight UTC. The limit is per API key, not per session.
+
+**Recommendation for team use:** Upgrade to a paid Alpha Vantage plan before sharing with the investment team. The premium tier removes daily limits. Alternatively, assign one key per heavy user.
+
+---
+
 ## Fallback / Rollback
 
 The `nazca-ui` branch contains all Nazca-specific changes to `streamlit_app.py`.
