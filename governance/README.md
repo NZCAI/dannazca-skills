@@ -2,7 +2,7 @@
 
 This folder is the single source of truth for Nazca system governance, architecture, and RBAC policy.
 
-**Last updated:** April 8, 2026
+**Last updated:** April 9, 2026
 
 ---
 
@@ -13,7 +13,7 @@ All active Nazca system repos — start here to navigate the codebase.
 | Repo | GitHub | Purpose | Status |
 |------|--------|---------|--------|
 | **dannazca-skills** | `NZCD5L/dannazca-skills` | Governance, RBAC policy, agent prompts, Intelligence Desk docs | ✅ Active |
-| **fastapi-bridge** | `NZCD5L/fastapi-bridge` | Universal API gateway — auth, RBAC, job tracking, MCP routing | ✅ Checkpoint 2 |
+| **fastapi-bridge** | `NZCD5L/fastapi-bridge` | Universal API gateway — auth, RBAC, job tracking, MCP routing | ✅ Live on ECS Fargate |
 | **TradingAgents** | `TauricResearch/TradingAgents` (`nazca-ui` branch) | Intelligence Desk UI — multi-agent stock analysis (Streamlit) | ✅ Stage 1 |
 
 ```
@@ -61,6 +61,7 @@ TradingAgents (Intelligence Desk UI)
 | `Observability_Framework.md` | Trace propagation schema, governance event logging spec, token tracking model |
 | `Containerization_Policy.md` | Docker strategy, resilience patterns, SLOs, deployment policies |
 | `project-context.yaml` | Active project metadata, sprint state, decision log |
+| `FastAPI_ECS_Deployment_Apr2026.md` | Session handoff — ECS Fargate deployment, IAM setup, fixes, redeploy runbook |
 
 ### RBAC Matrices (`rbac/`)
 

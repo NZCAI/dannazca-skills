@@ -5,10 +5,10 @@ owner: admin
 created: 2026-03-25
 
 # Current execution state
-current_phase: foundation
-current_sprint: 1
-sprint_start: 2026-03-25
-sprint_end: 2026-04-08
+current_phase: observability
+current_sprint: 2
+sprint_start: 2026-04-09
+sprint_end: 2026-04-22
 
 # Team composition and roles
 team:
@@ -77,13 +77,24 @@ key_decisions:
   deployment_target: AWS Fargate serverless (~$70/month)
   context_max_lines: 200 (per-document for token efficiency)
   external_users: none (internal tools only, no public endpoints)
-  authentication: RBAC sufficient for now (no OAuth/JWT layer)
+  authentication: JWT + RBAC middleware live in FastAPI Bridge (python-jose + PyJWT)
   http_fallback: EdgarTools HTTP is final (stdio was MVP)
-  storage: Postgres Aurora/RDS + S3
-  orchestration: Langchain (n8n as trigger, FastAPI as entry point)
+  storage: SQLite (current, dev/staging) → Postgres Aurora/RDS + S3 (Checkpoint 4)
+  orchestration: LangGraph 12-agent graph (n8n as trigger, FastAPI as entry point)
+  ecs_image_platform: linux/amd64 required for Fargate — always build with docker buildx --platform linux/amd64
+  ecs_task_ip: ephemeral public IP (changes on task restart) — ALB needed for stable URL (deferred)
 
 # Active blockers (none if empty)
-active_blockers: []
+active_blockers:
+  - item: ECS task IP is ephemeral — no stable public URL yet
+    severity: medium
+    mitigation: Add ALB before team-wide rollout (not blocking Intelligence Desk Stage 2)
+  - item: LangGraph agent nodes return mock outputs — real LLM calls not wired
+    severity: medium
+    mitigation: Deferred to dedicated session; pipeline is end-to-end functional with mocks
+  - item: SQLite has no persistence on ECS task restart (no EFS volume)
+    severity: low
+    mitigation: Acceptable until Checkpoint 4 PostgreSQL migration
 
 # Governance documents (single source of truth)
 governance_docs:
@@ -128,20 +139,28 @@ context_propagation:
 milestones:
   - name: Sprint 1 Foundation Ship
     target_date: 2026-04-08
+    status: complete
+    shipped_date: 2026-04-09
     deliverables:
-      - RBAC enforcement live at FastAPI Bridge
-      - EdgarTools Docker image in ECR
-      - Baseline observability operational
+      - RBAC enforcement live at FastAPI Bridge ✅
+      - LangGraph 12-agent trading graph wired (mock outputs) ✅
+      - 51/51 tests passing ✅
+      - FastAPI Docker image built + pushed to ECR ✅
+      - EdgarTools client integrated (HTTP mode) ✅
 
   - name: Sprint 2 Observability Ship
     target_date: 2026-04-22
+    status: in_progress
     deliverables:
+      - FastAPI container on ECS Fargate with public URL ✅ (shipped Apr 9 — early)
       - Governance event logging live
       - CloudWatch dashboards for team roles
-      - FastAPI containerized + integrated
+      - Intelligence Desk Stage 2 (FastAPI auth integration)
+      - ALB for stable public URL
 
   - name: Sprint 3 Token Tracking Ship
     target_date: 2026-05-06
+    status: planned
     deliverables:
       - Token tracking per-request + cost aggregation
       - n8n containerized
@@ -149,6 +168,7 @@ milestones:
 
   - name: Sprint 4 Production Ship
     target_date: 2026-05-20
+    status: planned
     deliverables:
       - All services at scale (replicas + auto-scaling)
       - SLO monitoring + alerting live

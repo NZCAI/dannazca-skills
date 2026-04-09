@@ -50,13 +50,56 @@ Skills in **deprecated** status follow this timeline:
 - CODEOWNERS file with skill ownership assignments
 - Updated README.md with complete skill inventory matrix
 - CHANGELOG.md with versioning and deprecation policy
+- `governance/FastAPI_ECS_Deployment_Apr2026.md` — ECS Fargate deployment session handoff doc
 
 ### Changed
 - All 13 SKILL.md files standardized with consistent metadata (version, status, allowed-tools, related-skills, tags)
 - Updated .markdownlint.json configuration for consistent markdown style
+- `governance/project-context.yaml` — advanced to Sprint 2, updated milestones, key decisions, and active blockers
 
 ### Fixed
 - None in this release
+
+---
+
+## [1.1.0] — 2026-04-09
+
+### Sprint 1 Complete + ECS Fargate Deployment ✅
+
+#### Added
+
+- **FastAPI Bridge — ECS Fargate deployment live:**
+  - ECS cluster `nazca-cluster` + Fargate service `nazca-fastapi-service` (us-east-1)
+  - Task definition `nazca-fastapi:1` — 512 CPU / 1024 MB, port 8000
+  - Public URL live: `http://32.192.36.164:8000` (ephemeral — changes on task restart)
+  - CloudWatch log group `/ecs/nazca-fastapi` streaming
+  - Secrets Manager integration: `OPENAI_API_KEY`, `JWT_SECRET_KEY`, `EDGAR_IDENTITY` injected at runtime
+  - IAM role `ecsTaskExecutionRole` with ECR pull + Secrets Manager access
+
+- **FastAPI Bridge — Sprint 1 baseline (shipped Apr 9):**
+  - 51/51 tests passing
+  - LangGraph 12-agent trading graph wired end-to-end (mock outputs)
+  - RBAC + JWT middleware live
+  - In-memory JobStore with async pipeline runners (5A/5B)
+  - EdgarTools HTTP client integrated
+
+- **Infrastructure decisions documented:**
+  - ECS image platform: `linux/amd64` required for Fargate (Apple Silicon builds are arm64)
+  - Secrets Manager key naming: clean JSON keys required (trailing whitespace breaks ECS secret injection)
+
+#### Changed
+
+- `project-context.yaml` — Sprint 1 → Sprint 2, milestones updated, key decisions corrected
+- ECR image rebuilt as `linux/amd64` (was arm64 from Apple Silicon build — incompatible with Fargate)
+
+#### Fixed
+
+- `EDGAR_IDENTITY` key in Secrets Manager had a trailing tab character — caused `ResourceInitializationError` during ECS task launch; fixed by rewriting secret via Python
+
+#### Status
+
+✅ Sprint 1: Foundation — COMPLETE (shipped Apr 9)
+🔄 Sprint 2: Observability — IN PROGRESS (target Apr 22)
 
 ---
 

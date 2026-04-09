@@ -2,8 +2,9 @@
 ## Integrated Modular System (8-Week Sprint Roadmap)
 
 **Date**: March 31, 2026
+**Last Updated**: April 9, 2026
 **Project Duration**: 8 weeks (Mar 31 - May 25, 2026)
-**Overall Status**: Phase 1 (Foundation) In Progress
+**Overall Status**: Phase 2 (Observability) In Progress — Sprint 1 Complete ✅
 
 ---
 
@@ -133,30 +134,34 @@
 ## DELIVERY TIMELINE BY LAYER
 
 ### PHASE 1: Foundation (Sprint 1 - Weeks 1-2)
-**Delivery Date: April 13, 2026**
+**Delivery Date: April 13, 2026** — ✅ SHIPPED Apr 9 (early)
 
 | Component | Status | MVP | Validation | Ship Date |
 |-----------|--------|-----|-----------|-----------|
-| **RBAC Enforcement** | ✅ In Progress | Apr 6 | Apr 10 | Apr 13 |
-| **EdgarTools MCP Container** | ✅ In Progress | Apr 6 | Apr 10 | Apr 13 |
-| **CI/CD Pipeline** | Planned | Apr 5 | Apr 9 | Apr 13 |
-| **Correlation ID Tracing** | Planned | Apr 7 | Apr 11 | Apr 13 |
+| **RBAC + JWT Enforcement** | ✅ Complete | Apr 6 | Apr 9 | Apr 9 |
+| **LangGraph 12-Agent Graph** | ✅ Complete (mock outputs) | Apr 6 | Apr 9 | Apr 9 |
+| **51/51 Tests Passing** | ✅ Complete | Apr 6 | Apr 9 | Apr 9 |
+| **FastAPI Docker Image → ECR** | ✅ Complete | Apr 7 | Apr 9 | Apr 9 |
+| **EdgarTools HTTP Client** | ✅ Complete | Apr 6 | Apr 9 | Apr 9 |
 
-**Deliverable**: RBAC enforcement live + EdgarTools containerized + foundational infrastructure ready
+**Deliverable**: FastAPI Bridge fully containerized, tested, and pushed to ECR — ready for ECS deployment
 
 ---
 
 ### PHASE 2: Observability (Sprint 2 - Weeks 3-4)
-**Delivery Date: April 27, 2026**
+**Delivery Date: April 27, 2026** — 🔄 In Progress
 
 | Component | Status | MVP | Validation | Ship Date |
 |-----------|--------|-----|-----------|-----------|
+| **FastAPI on ECS Fargate** | ✅ Complete (Apr 9, early) | Apr 9 | Apr 9 | Apr 9 |
+| **CloudWatch Logs (/ecs/nazca-fastapi)** | ✅ Complete (Apr 9) | Apr 9 | Apr 9 | Apr 9 |
 | **Governance Event Logging** | Planned | Apr 19 | Apr 23 | Apr 27 |
 | **CloudWatch Dashboards** | Planned | Apr 20 | Apr 24 | Apr 27 |
-| **FastAPI Container** | Planned | Apr 20 | Apr 24 | Apr 27 |
-| **Workflow 5A/5B Endpoints** | Planned | Apr 21 | Apr 25 | Apr 27 |
+| **Intelligence Desk Stage 2 (FastAPI auth)** | Planned | Apr 20 | Apr 24 | Apr 27 |
+| **ALB — Stable Public URL** | Planned | Apr 21 | Apr 25 | Apr 27 |
+| **Workflow 5A/5B Endpoints (live)** | Planned | Apr 21 | Apr 25 | Apr 27 |
 
-**Deliverable**: Full observability + FastAPI routing live + 5A/5B workflows operational
+**Deliverable**: Full observability + FastAPI routing live + 5A/5B workflows operational + stable HTTPS URL
 
 ---
 
@@ -227,18 +232,22 @@
 
 ## SYSTEM INTEGRATION CHECKPOINTS
 
-### Checkpoint 1: Foundation (Apr 13)
-- ✓ RBAC enforcement at FastAPI entry point
-- ✓ EdgarTools MCP containerized + load tested (100 req/sec)
-- ✓ Correlation ID propagation middleware
-- ✓ Unit tests: 40+ passing (auth, RBAC, validation)
+### Checkpoint 1: Foundation (Apr 13) — ✅ COMPLETE (Apr 9)
+- ✅ RBAC + JWT enforcement at FastAPI entry point
+- ✅ LangGraph 12-agent trading graph wired end-to-end (mock outputs)
+- ✅ Correlation ID propagation middleware
+- ✅ 51/51 unit tests passing (auth, RBAC, validation, workflows)
+- ✅ FastAPI Docker image built (linux/amd64) + pushed to ECR
+- ✅ EdgarTools HTTP client integrated
 
-### Checkpoint 2: API Bridge (Apr 27)
-- ✓ FastAPI container healthy
-- ✓ Workflow 5A/5B endpoints operational
-- ✓ Job management (trigger, poll, export)
-- ✓ Observability dashboards live in CloudWatch
-- ✓ Error responses standardized
+### Checkpoint 2: API Bridge (Apr 27) — 🔄 In Progress
+- ✅ FastAPI container on ECS Fargate — healthy (Apr 9, early)
+- ✅ CloudWatch Logs streaming (/ecs/nazca-fastapi)
+- ◻ Workflow 5A/5B endpoints operational (live traffic)
+- ◻ Job management E2E validated (trigger, poll, export)
+- ◻ Observability dashboards live in CloudWatch
+- ◻ ALB — stable HTTPS public URL
+- ◻ Intelligence Desk Stage 2 (FastAPI auth integration)
 
 ### Checkpoint 3: Automation (May 11)
 - ✓ n8n container running
@@ -258,22 +267,24 @@
 
 ## PROGRESS INDICATORS
 
-### Current Sprint (S1: Mar 31 - Apr 13)
+### Current Sprint (S2: Apr 9 - Apr 22)
 ```
-[████████░░░░░░░░░░░░░░░░░░░░░░░░] ~30% complete
-   ├─ RBAC Enforcement .............. 75% (testing phase)
-   ├─ EdgarTools Container .......... 80% (load testing)
-   ├─ FastAPI Bridge ................ 40% (architecture defined)
-   └─ CI/CD Setup ................... 20% (planned)
+[██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] ~10% complete (started Apr 9)
+   ├─ FastAPI on ECS Fargate ........ 100% ✅ (live Apr 9)
+   ├─ CloudWatch Logs ............... 100% ✅ (live Apr 9)
+   ├─ ALB / Stable URL .............. 0% (planned)
+   ├─ Governance Event Logging ....... 0% (planned)
+   ├─ CloudWatch Dashboards .......... 0% (planned)
+   └─ Intelligence Desk Stage 2 ...... 0% (planned)
 ```
 
 ### Overall Project (8 weeks)
 ```
-[████░░░░░░░░░░░░░░░░░░░░░░░░░░░░] Week 1 of 8 (~12%)
+[████████░░░░░░░░░░░░░░░░░░░░░░░░] Week 2 of 8 (~25%)
 
 Sprint Breakdown:
-  S1 (Apr 13) .... [████░░░░░░] Foundation
-  S2 (Apr 27) .... [░░░░░░░░░░] Observability
+  S1 (Apr 13) .... [██████████] Foundation ✅ COMPLETE
+  S2 (Apr 27) .... [██░░░░░░░░] Observability 🔄 In Progress
   S3 (May 11) .... [░░░░░░░░░░] Automation
   S4 (May 25) .... [░░░░░░░░░░] Production
 ```
@@ -304,9 +315,9 @@ No delays on critical path = on-schedule delivery
 
 | Milestone | Date | Status |
 |-----------|------|--------|
-| Project Kickoff | Mar 31, 2026 | ✓ Active |
-| Phase 1 Ship (Foundation) | Apr 13, 2026 | 🔄 In Progress |
-| Phase 2 Ship (Observability) | Apr 27, 2026 | 📅 Scheduled |
+| Project Kickoff | Mar 31, 2026 | ✅ Complete |
+| Phase 1 Ship (Foundation) | Apr 13, 2026 | ✅ Complete (shipped Apr 9) |
+| Phase 2 Ship (Observability) | Apr 27, 2026 | 🔄 In Progress |
 | Phase 3 Ship (Automation) | May 11, 2026 | 📅 Scheduled |
 | Phase 4 Ship (Production) | May 25, 2026 | 📅 Scheduled |
 | **System Operationally Ready** | **May 25, 2026** | **🎯 TARGET** |
@@ -334,4 +345,4 @@ No delays on critical path = on-schedule delivery
 - `Nazca_Technical_Specification_v2.md` — Technical architecture (Sections 7-8)
 - `Data_Science_Workflow_Integration_Framework.md` — API specs & implementation checklist
 
-**Last Updated**: March 31, 2026
+**Last Updated**: April 9, 2026
