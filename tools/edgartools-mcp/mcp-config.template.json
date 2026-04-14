@@ -1,6 +1,11 @@
 {
   "mcpServers": {
-    "edgartools": {
+    "nazca-edgar": {
+      "type": "http",
+      "url": "http://nazca-edgartools-alb-931246930.us-east-1.elb.amazonaws.com/mcp",
+      "disabled": false
+    },
+    "edgartools-local": {
       "type": "stdio",
       "command": "uvx",
       "args": [
@@ -11,24 +16,6 @@
       "env": {
         "EDGAR_IDENTITY": "Your Name your.email@example.com"
       },
-      "disabled": false
-    },
-    "edgar517": {
-      "type": "stdio",
-      "command": "uvx",
-      "args": [
-        "--from",
-        "edgartools[ai]==5.17.1",
-        "edgartools-mcp"
-      ],
-      "env": {
-        "EDGAR_IDENTITY": "Your Name your.email@example.com"
-      },
-      "disabled": true
-    },
-    "edgartools-http": {
-      "type": "http",
-      "url": "http://127.0.0.1:8765/mcp",
       "disabled": true
     }
   }

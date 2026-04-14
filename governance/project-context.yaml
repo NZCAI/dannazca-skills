@@ -90,15 +90,15 @@ key_decisions:
 
 # Active blockers (none if empty)
 active_blockers:
-  - item: ECS task IP is ephemeral — no stable public URL yet
-    severity: medium
-    mitigation: Add ALB before team-wide rollout (not blocking Intelligence Desk Stage 2)
   - item: LangGraph agent nodes return mock outputs — real LLM calls not wired
     severity: medium
     mitigation: Deferred to dedicated session; pipeline is end-to-end functional with mocks
   - item: SQLite has no persistence on ECS task restart (no EFS volume)
     severity: low
     mitigation: Acceptable until Checkpoint 4 PostgreSQL migration
+  - item: FastAPI Bridge not yet exposed as MCP server — team cannot call Trading Agents from Claude
+    severity: medium
+    mitigation: Next session — add mcp SDK layer to FastAPI Bridge
 
 # Governance documents (single source of truth)
 governance_docs:
@@ -157,7 +157,7 @@ milestones:
     status: in_progress
     deliverables:
       - FastAPI container on ECS Fargate with public URL ✅ (shipped Apr 9 — early)
-      - EdgarTools MCP behind ALB — stable URL, team-accessible from Claude
+      - EdgarTools MCP behind ALB — stable URL, team-accessible from Claude ✅ (shipped Apr 10)
       - FastAPI Bridge MCP layer (/mcp endpoint) — Trading Agents in Claude
       - Team Claude Desktop configs distributed and verified
 

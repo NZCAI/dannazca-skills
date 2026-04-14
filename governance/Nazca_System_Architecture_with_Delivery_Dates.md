@@ -158,7 +158,7 @@
 |-----------|--------|-----|-----------|-----------|
 | **FastAPI on ECS Fargate** | ✅ Complete (Apr 9, early) | Apr 9 | Apr 9 | Apr 9 |
 | **CloudWatch Logs (/ecs/nazca-fastapi)** | ✅ Complete (Apr 9) | Apr 9 | Apr 9 | Apr 9 |
-| **EdgarTools MCP behind ALB** | 🔄 In Progress | Apr 10 | Apr 10 | Apr 10 |
+| **EdgarTools MCP behind ALB** | ✅ Complete (Apr 10) | Apr 10 | Apr 10 | Apr 10 |
 | **FastAPI Bridge — MCP layer** | Planned | Apr 13 | Apr 17 | Apr 20 |
 | **Team Claude Desktop configs distributed** | Planned | Apr 20 | Apr 22 | Apr 22 |
 
@@ -249,9 +249,10 @@
 ### Checkpoint 2: MCP Accessibility (Apr 27) — 🔄 In Progress
 - ✅ FastAPI container on ECS Fargate — healthy (Apr 9)
 - ✅ CloudWatch Logs streaming (/ecs/nazca-fastapi)
-- ◻ EdgarTools MCP behind ALB — stable URL, team-accessible from Claude
-- ◻ FastAPI Bridge MCP layer — Trading Agents callable from Claude
-- ◻ Team Claude Desktop configs distributed and verified
+- ✅ EdgarTools MCP behind ALB — 13 tools live, team-accessible from Claude (Apr 10)
+- ✅ Claude Desktop config template distributed (mcp-config.template.json)
+- ◻ FastAPI Bridge MCP layer — Trading Agents callable from Claude (next session)
+- ◻ Team Claude Desktop configs verified end-to-end
 
 ### Checkpoint 3: Platform Expansion (May 11)
 - ◻ Additional MCP tools wired via established pattern
@@ -274,12 +275,12 @@
 
 ### Current Sprint (S2: Apr 9 - Apr 27) — MCP Accessibility
 ```
-[████░░░░░░░░░░░░░░░░░░░░░░░░░░░░] ~20% complete
+[██████░░░░░░░░░░░░░░░░░░░░░░░░░░] ~40% complete
    ├─ FastAPI on ECS Fargate ........ 100% ✅ (live Apr 9)
    ├─ CloudWatch Logs ............... 100% ✅ (live Apr 9)
-   ├─ EdgarTools MCP + ALB .......... 🔄 In Progress (Apr 10)
+   ├─ EdgarTools MCP + ALB .......... 100% ✅ (live Apr 10, 13 tools)
    ├─ FastAPI Bridge MCP layer ....... 0% (next session)
-   └─ Team Claude Desktop configs .... 0% (follows MCP layer)
+   └─ Team Claude Desktop configs .... 50% (template ready, distribution pending)
 ```
 
 ### Overall Project (8 weeks)
