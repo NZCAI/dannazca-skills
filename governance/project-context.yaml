@@ -87,6 +87,8 @@ key_decisions:
   mcp_first: Team primary interface is Claude — MCP accessibility takes priority over infrastructure completeness
   fastapi_as_mcp: FastAPI Bridge will expose /mcp endpoint (mcp SDK) alongside existing REST routes — no separate service needed
   edgartools_delivery: EdgarTools MCP behind ALB is the fastest path to team value — shared endpoint, one config per user
+  sqlite_rationale: SQLite is intentional for early development — zero infra, fast to ship. Breaks down at production because container restarts wipe data, concurrent writes cause locking, and it cannot serve as the knowledge base. Migrate to PostgreSQL when team is actively generating data worth keeping.
+  storage_layer: Two-tier approach — Redis (TTL cache for hot queries: prices 1h, profiles 7d, filings 30d) + PostgreSQL (permanent time-series store for financial data, agent outputs, EDGAR snapshots). Builds proprietary knowledge base over time. Redis doubles as Celery job queue. PostgreSQL migration is the dependency for both.
 
 # Active blockers (none if empty)
 active_blockers:

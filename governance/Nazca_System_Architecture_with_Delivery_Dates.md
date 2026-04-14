@@ -168,34 +168,38 @@
 
 ### PHASE 3: Platform Expansion (Sprint 3 - Weeks 5-6)
 **Delivery Date: May 11, 2026**
-**Goal: Additional MCP tools + operational observability**
+**Goal: Additional MCP tools + rate limiting + observability + storage foundation**
 
 | Component | Status | MVP | Validation | Ship Date |
 |-----------|--------|-----|-----------|-----------|
 | **Additional MCPs (pattern established)** | Planned | May 3 | May 7 | May 11 |
-| **n8n Automation Container** | Planned | May 3 | May 7 | May 11 |
+| **Trading Agent rate limiting + per-role quotas** | Planned | May 3 | May 7 | May 11 |
+| **n8n Automation Container** | Planned | May 4 | May 8 | May 11 |
 | **Governance Event Logging** | Planned | May 4 | May 8 | May 11 |
 | **CloudWatch Dashboards (team roles)** | Planned | May 4 | May 8 | May 11 |
 | **Token Tracking per-request** | Planned | May 5 | May 9 | May 11 |
 
-**Deliverable**: Any new MCP tool added via established pattern + full team observability live
+**Deliverable**: Governed, rate-limited MCP access for the team + full observability live
 
 ---
 
-### PHASE 4: Production Hardening (Sprint 4 - Weeks 7-8)
+### PHASE 4: Production Hardening + Knowledge Base (Sprint 4 - Weeks 7-8)
 **Delivery Date: May 25, 2026**
-**Goal: Production-grade infrastructure — performance, resilience, cost control**
+**Goal: Production-grade infrastructure + storage layer that turns usage into institutional memory**
 
 | Component | Status | MVP | Validation | Ship Date |
 |-----------|--------|-----|-----------|-----------|
 | **PostgreSQL migration (replace SQLite)** | Planned | May 18 | May 22 | May 25 |
+| **Redis TTL cache (EDGAR + agent results)** | Planned | May 18 | May 22 | May 25 |
 | **Celery + Redis job queue** | Planned | May 18 | May 22 | May 25 |
+| **Time-series knowledge base (query storage)** | Planned | May 19 | May 23 | May 25 |
 | **Multi-Replica Deployment (3x)** | Planned | May 19 | May 23 | May 25 |
-| **Auto-Scaling + SLO Monitoring** | Planned | May 19 | May 23 | May 25 |
+| **Auto-Scaling + SLO Monitoring** | Planned | May 20 | May 24 | May 25 |
 | **Cost Alerts + Billing Controls** | Planned | May 20 | May 24 | May 25 |
-| **Ops Handoff Complete** | Planned | May 20 | May 24 | May 25 |
 
-**Deliverable**: Full production system — resilient, scalable, cost-tracked, team-operated
+**Deliverable**: Resilient production system + every team query stored and reusable by future agents
+
+> **Storage architecture note**: Two-tier approach. Redis handles hot queries with TTL (stock prices: 1h, company profiles: 7d, SEC filings: 30d). PostgreSQL is the permanent time-series store — financial snapshots, agent analysis outputs, EDGAR results — that builds into a proprietary knowledge base over time. SQLite remains intentionally until this phase: it works fine before the team generates data worth keeping, and the migration is a single `DATABASE_URL` swap plus schema migration.
 
 ---
 
@@ -261,13 +265,22 @@
 - ◻ CloudWatch dashboards per team role
 - ◻ Token tracking per-request
 
-### Checkpoint 4: Production Ready (May 25)
+### Checkpoint 3: Platform Expansion (May 11)
+- ◻ Trading Agent concurrent job limit + per-role daily quotas
+- ◻ Additional MCPs added via established pattern
+- ◻ n8n container running
+- ◻ Governance event logging live
+- ◻ CloudWatch dashboards per team role
+- ◻ Token tracking per-request
+
+### Checkpoint 4: Production Ready + Knowledge Base (May 25)
 - ◻ PostgreSQL migration (replace SQLite)
+- ◻ Redis TTL cache — EDGAR results, agent outputs
+- ◻ Time-series knowledge base live — all team queries stored
 - ◻ Celery + Redis job queue
 - ◻ 3x replicas + auto-scaling per service
 - ◻ SLO monitoring live (99.5% EDGAR, 99.9% FastAPI)
 - ◻ Cost alerts configured
-- ◻ Team trained + ops handoff complete
 
 ---
 
