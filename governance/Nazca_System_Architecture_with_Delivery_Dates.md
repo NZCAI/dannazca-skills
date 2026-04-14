@@ -2,9 +2,11 @@
 ## Integrated Modular System (8-Week Sprint Roadmap)
 
 **Date**: March 31, 2026
-**Last Updated**: April 9, 2026
+**Last Updated**: April 10, 2026
 **Project Duration**: 8 weeks (Mar 31 - May 25, 2026)
-**Overall Status**: Phase 2 (Observability) In Progress — Sprint 1 Complete ✅
+**Overall Status**: Phase 2 (MCP Accessibility) In Progress — Sprint 1 Complete ✅
+
+> **Strategic Note (Apr 10):** Roadmap resequenced to prioritize MCP accessibility over infrastructure completeness. The team's primary interface is Claude — delivering usable tools in Claude now takes precedence over observability dashboards and production hardening. Infrastructure work (PostgreSQL, Celery, SLO monitoring) moves to Phase 4.
 
 ---
 
@@ -148,48 +150,52 @@
 
 ---
 
-### PHASE 2: Observability (Sprint 2 - Weeks 3-4)
+### PHASE 2: MCP Accessibility — Team Enablement (Sprint 2 - Weeks 3-4)
 **Delivery Date: April 27, 2026** — 🔄 In Progress
+**Goal: Every team member has EdgarTools and Trading Agents available in Claude**
 
 | Component | Status | MVP | Validation | Ship Date |
 |-----------|--------|-----|-----------|-----------|
 | **FastAPI on ECS Fargate** | ✅ Complete (Apr 9, early) | Apr 9 | Apr 9 | Apr 9 |
 | **CloudWatch Logs (/ecs/nazca-fastapi)** | ✅ Complete (Apr 9) | Apr 9 | Apr 9 | Apr 9 |
-| **Governance Event Logging** | Planned | Apr 19 | Apr 23 | Apr 27 |
-| **CloudWatch Dashboards** | Planned | Apr 20 | Apr 24 | Apr 27 |
-| **Intelligence Desk Stage 2 (FastAPI auth)** | Planned | Apr 20 | Apr 24 | Apr 27 |
-| **ALB — Stable Public URL** | Planned | Apr 21 | Apr 25 | Apr 27 |
-| **Workflow 5A/5B Endpoints (live)** | Planned | Apr 21 | Apr 25 | Apr 27 |
+| **EdgarTools MCP behind ALB** | 🔄 In Progress | Apr 10 | Apr 10 | Apr 10 |
+| **FastAPI Bridge — MCP layer** | Planned | Apr 13 | Apr 17 | Apr 20 |
+| **Team Claude Desktop configs distributed** | Planned | Apr 20 | Apr 22 | Apr 22 |
 
-**Deliverable**: Full observability + FastAPI routing live + 5A/5B workflows operational + stable HTTPS URL
+**Deliverable**: Team connects to Nazca tools from Claude using a one-line config. Edgar queries and Trading Agent analysis available as MCP tools.
 
 ---
 
-### PHASE 3: Automation & Cost Tracking (Sprint 3 - Weeks 5-6)
+### PHASE 3: Platform Expansion (Sprint 3 - Weeks 5-6)
 **Delivery Date: May 11, 2026**
+**Goal: Additional MCP tools + operational observability**
 
 | Component | Status | MVP | Validation | Ship Date |
 |-----------|--------|-----|-----------|-----------|
-| **n8n Container** | Planned | May 3 | May 7 | May 11 |
-| **Token Tracking** | Planned | May 4 | May 8 | May 11 |
-| **Cost Alerts** | Planned | May 4 | May 8 | May 11 |
-| **Market Analysis Async** | Planned | May 5 | May 9 | May 11 |
+| **Additional MCPs (pattern established)** | Planned | May 3 | May 7 | May 11 |
+| **n8n Automation Container** | Planned | May 3 | May 7 | May 11 |
+| **Governance Event Logging** | Planned | May 4 | May 8 | May 11 |
+| **CloudWatch Dashboards (team roles)** | Planned | May 4 | May 8 | May 11 |
+| **Token Tracking per-request** | Planned | May 5 | May 9 | May 11 |
 
-**Deliverable**: Automation engine live + token tracking enabled + market analysis integrated
+**Deliverable**: Any new MCP tool added via established pattern + full team observability live
 
 ---
 
-### PHASE 4: Production Scale (Sprint 4 - Weeks 7-8)
+### PHASE 4: Production Hardening (Sprint 4 - Weeks 7-8)
 **Delivery Date: May 25, 2026**
+**Goal: Production-grade infrastructure — performance, resilience, cost control**
 
 | Component | Status | MVP | Validation | Ship Date |
 |-----------|--------|-----|-----------|-----------|
-| **Multi-Replica Deployment (3x)** | Planned | May 18 | May 22 | May 25 |
-| **SLO Monitoring** | Planned | May 19 | May 23 | May 25 |
-| **Auto-Scaling Enabled** | Planned | May 19 | May 23 | May 25 |
+| **PostgreSQL migration (replace SQLite)** | Planned | May 18 | May 22 | May 25 |
+| **Celery + Redis job queue** | Planned | May 18 | May 22 | May 25 |
+| **Multi-Replica Deployment (3x)** | Planned | May 19 | May 23 | May 25 |
+| **Auto-Scaling + SLO Monitoring** | Planned | May 19 | May 23 | May 25 |
+| **Cost Alerts + Billing Controls** | Planned | May 20 | May 24 | May 25 |
 | **Ops Handoff Complete** | Planned | May 20 | May 24 | May 25 |
 
-**Deliverable**: Full production system operational at scale with governance & monitoring
+**Deliverable**: Full production system — resilient, scalable, cost-tracked, team-operated
 
 ---
 
@@ -240,42 +246,40 @@
 - ✅ FastAPI Docker image built (linux/amd64) + pushed to ECR
 - ✅ EdgarTools HTTP client integrated
 
-### Checkpoint 2: API Bridge (Apr 27) — 🔄 In Progress
-- ✅ FastAPI container on ECS Fargate — healthy (Apr 9, early)
+### Checkpoint 2: MCP Accessibility (Apr 27) — 🔄 In Progress
+- ✅ FastAPI container on ECS Fargate — healthy (Apr 9)
 - ✅ CloudWatch Logs streaming (/ecs/nazca-fastapi)
-- ◻ Workflow 5A/5B endpoints operational (live traffic)
-- ◻ Job management E2E validated (trigger, poll, export)
-- ◻ Observability dashboards live in CloudWatch
-- ◻ ALB — stable HTTPS public URL
-- ◻ Intelligence Desk Stage 2 (FastAPI auth integration)
+- ◻ EdgarTools MCP behind ALB — stable URL, team-accessible from Claude
+- ◻ FastAPI Bridge MCP layer — Trading Agents callable from Claude
+- ◻ Team Claude Desktop configs distributed and verified
 
-### Checkpoint 3: Automation (May 11)
-- ✓ n8n container running
-- ✓ Token tracking per-request
-- ✓ Market Analysis 5 phases async
-- ✓ Cost alerts configured
-- ✓ Fallback strategies tested
+### Checkpoint 3: Platform Expansion (May 11)
+- ◻ Additional MCP tools wired via established pattern
+- ◻ n8n container running
+- ◻ Governance event logging live
+- ◻ CloudWatch dashboards per team role
+- ◻ Token tracking per-request
 
 ### Checkpoint 4: Production Ready (May 25)
-- ✓ 3x replicas per service
-- ✓ Auto-scaling policies enabled
-- ✓ SLO monitoring live (99.5% EDGAR, 99.9% FastAPI)
-- ✓ Team trained + handoff complete
-- ✓ All workflows operationally validated
+- ◻ PostgreSQL migration (replace SQLite)
+- ◻ Celery + Redis job queue
+- ◻ 3x replicas + auto-scaling per service
+- ◻ SLO monitoring live (99.5% EDGAR, 99.9% FastAPI)
+- ◻ Cost alerts configured
+- ◻ Team trained + ops handoff complete
 
 ---
 
 ## PROGRESS INDICATORS
 
-### Current Sprint (S2: Apr 9 - Apr 22)
+### Current Sprint (S2: Apr 9 - Apr 27) — MCP Accessibility
 ```
-[██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] ~10% complete (started Apr 9)
+[████░░░░░░░░░░░░░░░░░░░░░░░░░░░░] ~20% complete
    ├─ FastAPI on ECS Fargate ........ 100% ✅ (live Apr 9)
    ├─ CloudWatch Logs ............... 100% ✅ (live Apr 9)
-   ├─ ALB / Stable URL .............. 0% (planned)
-   ├─ Governance Event Logging ....... 0% (planned)
-   ├─ CloudWatch Dashboards .......... 0% (planned)
-   └─ Intelligence Desk Stage 2 ...... 0% (planned)
+   ├─ EdgarTools MCP + ALB .......... 🔄 In Progress (Apr 10)
+   ├─ FastAPI Bridge MCP layer ....... 0% (next session)
+   └─ Team Claude Desktop configs .... 0% (follows MCP layer)
 ```
 
 ### Overall Project (8 weeks)
@@ -284,9 +288,9 @@
 
 Sprint Breakdown:
   S1 (Apr 13) .... [██████████] Foundation ✅ COMPLETE
-  S2 (Apr 27) .... [██░░░░░░░░] Observability 🔄 In Progress
-  S3 (May 11) .... [░░░░░░░░░░] Automation
-  S4 (May 25) .... [░░░░░░░░░░] Production
+  S2 (Apr 27) .... [████░░░░░░] MCP Accessibility 🔄 In Progress
+  S3 (May 11) .... [░░░░░░░░░░] Platform Expansion
+  S4 (May 25) .... [░░░░░░░░░░] Production Hardening
 ```
 
 ---
@@ -294,20 +298,18 @@ Sprint Breakdown:
 ## CRITICAL PATH
 
 ```
-S1: RBAC + EdgarTools
+S1: Foundation — FastAPI + LangGraph + ECS
   ↓ (dependency)
-S2: FastAPI Bridge + Observability
-  ├─ (dependency)
-  ↓
-S3: n8n + Token Tracking
-  ├─ (dependency)
-  ↓
-S4: Production Scale + SLO Monitoring
+S2: MCP Accessibility — EdgarTools in Claude + Trading Agents in Claude
+  ↓ (dependency)
+S3: Platform Expansion — Additional MCPs + n8n + Observability
+  ↓ (dependency)
+S4: Production Hardening — PostgreSQL + Celery + Scale + SLO
   ↓
 SHIP: May 25, 2026 ✓
 ```
 
-No delays on critical path = on-schedule delivery
+Team value delivered at S2 — every subsequent sprint adds capability and resilience
 
 ---
 
@@ -317,9 +319,10 @@ No delays on critical path = on-schedule delivery
 |-----------|------|--------|
 | Project Kickoff | Mar 31, 2026 | ✅ Complete |
 | Phase 1 Ship (Foundation) | Apr 13, 2026 | ✅ Complete (shipped Apr 9) |
-| Phase 2 Ship (Observability) | Apr 27, 2026 | 🔄 In Progress |
-| Phase 3 Ship (Automation) | May 11, 2026 | 📅 Scheduled |
-| Phase 4 Ship (Production) | May 25, 2026 | 📅 Scheduled |
+| Phase 2 Ship (MCP Accessibility) | Apr 27, 2026 | 🔄 In Progress |
+| **Team using tools in Claude** | **Apr 27, 2026** | **🎯 KEY MILESTONE** |
+| Phase 3 Ship (Platform Expansion) | May 11, 2026 | 📅 Scheduled |
+| Phase 4 Ship (Production Hardening) | May 25, 2026 | 📅 Scheduled |
 | **System Operationally Ready** | **May 25, 2026** | **🎯 TARGET** |
 
 ---

@@ -56,6 +56,7 @@ Skills in **deprecated** status follow this timeline:
 - All 13 SKILL.md files standardized with consistent metadata (version, status, allowed-tools, related-skills, tags)
 - Updated .markdownlint.json configuration for consistent markdown style
 - `governance/project-context.yaml` — advanced to Sprint 2, updated milestones, key decisions, and active blockers
+- **Strategic pivot (Apr 10):** Roadmap resequenced — MCP accessibility before infrastructure completeness. Team primary interface is Claude; delivering usable tools in Claude now takes priority over dashboards, PostgreSQL, and production hardening.
 
 ### Fixed
 - None in this release

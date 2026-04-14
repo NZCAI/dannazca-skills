@@ -5,10 +5,11 @@ owner: admin
 created: 2026-03-25
 
 # Current execution state
-current_phase: observability
+current_phase: mcp_accessibility
 current_sprint: 2
 sprint_start: 2026-04-09
-sprint_end: 2026-04-22
+sprint_end: 2026-04-27
+sprint_goal: Get EdgarTools and Trading Agents available in Claude for the team
 
 # Team composition and roles
 team:
@@ -82,7 +83,10 @@ key_decisions:
   storage: SQLite (current, dev/staging) → Postgres Aurora/RDS + S3 (Checkpoint 4)
   orchestration: LangGraph 12-agent graph (n8n as trigger, FastAPI as entry point)
   ecs_image_platform: linux/amd64 required for Fargate — always build with docker buildx --platform linux/amd64
-  ecs_task_ip: ephemeral public IP (changes on task restart) — ALB needed for stable URL (deferred)
+  ecs_task_ip: ephemeral public IP (changes on task restart) — ALB required for any team-facing service
+  mcp_first: Team primary interface is Claude — MCP accessibility takes priority over infrastructure completeness
+  fastapi_as_mcp: FastAPI Bridge will expose /mcp endpoint (mcp SDK) alongside existing REST routes — no separate service needed
+  edgartools_delivery: EdgarTools MCP behind ALB is the fastest path to team value — shared endpoint, one config per user
 
 # Active blockers (none if empty)
 active_blockers:
@@ -148,15 +152,14 @@ milestones:
       - FastAPI Docker image built + pushed to ECR ✅
       - EdgarTools client integrated (HTTP mode) ✅
 
-  - name: Sprint 2 Observability Ship
-    target_date: 2026-04-22
+  - name: Sprint 2 MCP Accessibility Ship
+    target_date: 2026-04-27
     status: in_progress
     deliverables:
       - FastAPI container on ECS Fargate with public URL ✅ (shipped Apr 9 — early)
-      - Governance event logging live
-      - CloudWatch dashboards for team roles
-      - Intelligence Desk Stage 2 (FastAPI auth integration)
-      - ALB for stable public URL
+      - EdgarTools MCP behind ALB — stable URL, team-accessible from Claude
+      - FastAPI Bridge MCP layer (/mcp endpoint) — Trading Agents in Claude
+      - Team Claude Desktop configs distributed and verified
 
   - name: Sprint 3 Token Tracking Ship
     target_date: 2026-05-06
