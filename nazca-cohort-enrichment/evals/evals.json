@@ -1,0 +1,66 @@
+{
+  "skill_name": "nazca-cohort-enrichment",
+  "version": "1.0",
+  "last_run": "2026-05-11",
+  "benchmark_summary": {
+    "with_skill_pass_rate": "100%",
+    "without_skill_pass_rate": "33%",
+    "delta": "+67pp"
+  },
+  "evals": [
+    {
+      "id": 1,
+      "name": "session-state-check",
+      "prompt": "I'm starting a new Nazca session. What's the current state of the enrichment pipeline?",
+      "expected_output": "Reads the state file at /Users/dannazca/Factory/cohorts/nazca_enrichment_state.json, surfaces all cohorts with their company counts (total, enriched, pending), flags any cohort with pending > 0 as needing action, notes dead sources (Financial Datasets API and Brightdata), and recommends a concrete next action.",
+      "assertions": [
+        "Reads the state file at /Users/dannazca/Factory/cohorts/nazca_enrichment_state.json",
+        "Surfaces all 4 cohort names: LATAM_IPO, US_IPO, Hot_Startups, Publicas_GUR",
+        "Shows company counts (total, enriched, pending) for each cohort",
+        "Flags dead sources: Financial Datasets API ($0 balance) and Brightdata (HTTP 401)",
+        "Recommends a concrete next action with cohort name and source routing"
+      ],
+      "results": {
+        "with_skill": {"passed": 5, "total": 5, "pass_rate": 1.0},
+        "without_skill": {"passed": 1, "total": 5, "pass_rate": 0.2,
+          "failure_notes": "Used stale session memory instead of reading state file. No cohort names, no counts, no concrete next action."}
+      }
+    },
+    {
+      "id": 2,
+      "name": "add-companies",
+      "prompt": "I have new companies to add to the LATAM_IPO cohort: Konfio (FinTech, Mexico, private) and Sempli (FinTech, Colombia, private). Add them and set up the enrichment run.",
+      "expected_output": "Adds both companies to LATAM_IPO via cohort_manager.py --action add, creates a snapshot for the current month, applies correct source routing (Harmonic MCP for private companies, NOT EDGAR), confirms pending count increased.",
+      "assertions": [
+        "Calls cohort_manager.py --action add with both companies in JSON format",
+        "Identifies both companies as private (no ticker) and routes to Harmonic MCP",
+        "Creates or updates a snapshot for LATAM_IPO for the current month",
+        "Does NOT attempt to call EDGAR for private companies",
+        "Confirms the pending count in the cohort increased by 2"
+      ],
+      "results": {
+        "with_skill": {"passed": 5, "total": 5, "pass_rate": 1.0},
+        "without_skill": {"passed": 2, "total": 5, "pass_rate": 0.4,
+          "failure_notes": "Found companies in Harmonic correctly but called add_companies_to_list (live Harmonic watchlist API) instead of cohort_manager.py. No snapshot created, no pending count tracked."}
+      }
+    },
+    {
+      "id": 3,
+      "name": "cohort-delta",
+      "prompt": "What changed in the LATAM_IPO cohort between May 2026 and the most recent snapshot?",
+      "expected_output": "Checks state file for available LATAM_IPO snapshots, attempts cohort_manager.py --action delta. If only one snapshot exists, gracefully explains that a second is needed and provides a concrete path to enable comparison.",
+      "assertions": [
+        "Checks the state file to identify available snapshots for LATAM_IPO",
+        "Attempts cohort_manager.py --action delta with --from and --to dates",
+        "If only one snapshot exists, clearly explains a second snapshot is needed without crashing",
+        "Does NOT hallucinate metric changes with no second snapshot to compare against",
+        "Suggests a concrete path to enable the comparison (complete enrichment, create T1 snapshot)"
+      ],
+      "results": {
+        "with_skill": {"passed": 5, "total": 5, "pass_rate": 1.0},
+        "without_skill": {"passed": 2, "total": 5, "pass_rate": 0.4,
+          "failure_notes": "Did not read state file. Asked user where data is stored instead of providing a path forward. No hallucinations (correct), but no actionable guidance."}
+      }
+    }
+  ]
+}
