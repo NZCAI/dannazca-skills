@@ -43,6 +43,51 @@ nazca-cohort-enrichment/
 
 ---
 
+## Prerequisites
+
+**Required (core skill):**
+- Claude Code with skills support (`~/.claude/skills/`)
+- Python 3.9+
+- EDGAR MCP (`edgartools`) configured in Claude Code
+- Harmonic MCP configured in Claude Code
+
+**Optional (full Nazca Factory pipeline):**
+- `~/Factory/enrich_publicas_gur.py`
+- `~/Factory/nazca_revenue_engine.py`
+- `~/Factory/nazca_tag_engine.py`
+- `~/Factory/harmonic_timeseries_cache.py`
+- `~/Factory/build_publicas_gur_excel.py`
+
+Contact dan@nazca.vc for access to Factory scripts.  
+Set `NAZCA_FACTORY_DIR` env var to override the default `~/Factory/` location.
+
+---
+
+## Installation
+
+```bash
+# 1. Clone
+git clone https://github.com/NZCAI/dannazca-skills.git
+
+# 2. Copy skill to Claude config
+cp -R dannazca-skills/nazca-cohort-enrichment ~/.claude/skills/
+
+# 3. Initialize state
+python3 ~/.claude/skills/nazca-cohort-enrichment/scripts/cohort_manager.py --setup
+
+# 4. (Optional) Override Factory dir
+export NAZCA_FACTORY_DIR=~/my-custom-path  # default: ~/Factory
+
+# 5. Restart Claude Code
+```
+
+Or use the installer script (idempotent, handles all steps):
+```bash
+bash dannazca-skills/nazca-cohort-enrichment/install.sh
+```
+
+---
+
 ## Quick start
 
 ### First-time setup (creates state file + variable registry)
@@ -53,7 +98,7 @@ python3 scripts/cohort_manager.py --setup
 ### Every session start
 ```bash
 # The skill does this automatically — reads state and surfaces what's pending
-cat /Users/dannazca/Factory/cohorts/nazca_enrichment_state.json
+cat "${NAZCA_FACTORY_DIR:-$HOME/Factory}/cohorts/nazca_enrichment_state.json"
 python3 scripts/cohort_manager.py --action status
 ```
 
@@ -137,7 +182,7 @@ Full rules in [`references/variable_registry.md`](references/variable_registry.m
 ## State files (live — not in this repo)
 
 ```
-/Users/dannazca/Factory/cohorts/
+~/Factory/cohorts/           (or $NAZCA_FACTORY_DIR/cohorts/)
   nazca_enrichment_state.json     ← master state: all cohorts, counts, last_run
   variable_registry.json          ← machine-readable source priority per variable
   LATAM_IPO_2026-05.json          ← snapshot: company list + enriched variables
@@ -150,7 +195,10 @@ because they contain live pipeline state that changes every session.
 
 ---
 
-## Related scripts (in `/Users/dannazca/Factory/`)
+## Optional Factory scripts (`~/Factory/`)
+
+These scripts are **not included in this repo** — contact dan@nazca.vc for access.  
+The skill works without them (using MCP tools directly); they enable the full Nazca pipeline.
 
 | Script | Purpose |
 |---|---|
