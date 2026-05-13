@@ -28,7 +28,9 @@ from pathlib import Path
 
 # ─── Paths ────────────────────────────────────────────────────────────────────
 
-COHORTS_DIR = Path("/Users/dannazca/Factory/cohorts")
+_factory_default = Path.home() / "Factory"
+FACTORY_DIR = Path(os.environ.get("NAZCA_FACTORY_DIR", str(_factory_default)))
+COHORTS_DIR = FACTORY_DIR / "cohorts"
 STATE_FILE = COHORTS_DIR / "nazca_enrichment_state.json"
 VARIABLE_REGISTRY_FILE = COHORTS_DIR / "variable_registry.json"
 

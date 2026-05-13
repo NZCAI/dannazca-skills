@@ -22,12 +22,12 @@ that evolve over time**.
 
 Read the state file:
 ```bash
-cat /Users/dannazca/Factory/cohorts/nazca_enrichment_state.json
+cat "${NAZCA_FACTORY_DIR:-$HOME/Factory}/cohorts/nazca_enrichment_state.json"
 ```
 
 If it doesn't exist yet, run the setup script:
 ```bash
-python3 /Users/dannazca/Library/Application\ Support/Claude/local-agent-mode-sessions/skills-plugin/73b8d0f3-e35b-45a5-b276-47df6b20cbd4/b4500c34-58f5-4cc3-a37e-8b540d1d2ef9/skills/nazca-cohort-enrichment/scripts/cohort_manager.py --setup
+python3 ~/.claude/skills/nazca-cohort-enrichment/scripts/cohort_manager.py --setup
 ```
 
 Then surface to the user:
@@ -167,21 +167,22 @@ python3 .../scripts/cohort_manager.py --cohort LATAM_IPO --action status
 2. Parse response → compute derived metrics → store in cohort snapshot
 3. Apply rules-based scores (no API call)
 
-Reference existing enrichment script:
+If `~/Factory/enrich_publicas_gur.py` is installed (Nazca Factory stack), call:
 ```bash
-python3 /Users/dannazca/Factory/enrich_publicas_gur.py --batch 10
+python3 ~/Factory/enrich_publicas_gur.py --batch 10
 ```
+Otherwise, call `edgar_trends` directly per Step 3 variable registry.
 
 ### For private companies (no ticker, VC-backed)
 
 1. Pull from Harmonic MCP: `get_company_list_entries` or `get_companies`
 2. Get traction via: `web_social_headcount_timeseries` (10-call/day Harmonic limit)
-3. Estimate revenue via OLS model:
+3. Estimate revenue via OLS model (if Factory scripts installed):
    ```bash
    # In Python: from nazca_revenue_engine import estimate_revenue
    # revenue = HC × RPE_sector × stage_multiplier × region_beta
    ```
-4. Score 25 behavioral tags via `nazca_tag_engine.py`
+4. Score 25 behavioral tags via `nazca_tag_engine.py` (if Factory scripts installed)
 5. Apply rules-based scores
 
 ---
@@ -199,23 +200,25 @@ The next session reads this file in Step 1 — this is the entire handoff mechan
 
 ---
 
-## Existing scripts (do not duplicate — import or call these)
+## Optional Factory scripts (do not duplicate — import or call if present)
+
+These scripts are part of the Nazca Factory stack. They live in `~/Factory/` (or `$NAZCA_FACTORY_DIR/`) and are **not included in this repo** — contact dan@nazca.vc for access.
 
 | Script | Purpose |
 |---|---|
-| `/Users/dannazca/Factory/enrich_publicas_gur.py` | Public company enrichment manager (CLI + cache) |
-| `/Users/dannazca/Factory/build_publicas_gur_excel.py` | Builds 5-sheet Excel from cache |
-| `/Users/dannazca/Factory/nazca_revenue_engine.py` | OLS revenue model for private companies |
-| `/Users/dannazca/Factory/nazca_tag_engine.py` | 25-tag behavioral scorer |
-| `/Users/dannazca/Factory/harmonic_timeseries_cache.py` | Harmonic traction data cache |
-| `/Users/dannazca/Factory/cohorts/` | All cohort state and snapshot files |
+| `~/Factory/enrich_publicas_gur.py` | Public company enrichment manager (CLI + cache) |
+| `~/Factory/build_publicas_gur_excel.py` | Builds 5-sheet Excel from cache |
+| `~/Factory/nazca_revenue_engine.py` | OLS revenue model for private companies |
+| `~/Factory/nazca_tag_engine.py` | 25-tag behavioral scorer |
+| `~/Factory/harmonic_timeseries_cache.py` | Harmonic traction data cache |
+| `~/Factory/cohorts/` | All cohort state and snapshot files |
 
 ---
 
 ## File layout
 
 ```
-/Users/dannazca/Factory/cohorts/
+~/Factory/cohorts/           (or $NAZCA_FACTORY_DIR/cohorts/)
   nazca_enrichment_state.json          ← master state (all cohorts)
   variable_registry.json               ← source priority per variable
   LATAM_IPO_2026-05.json               ← snapshot: who was in the list + their metrics

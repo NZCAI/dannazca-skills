@@ -12,9 +12,9 @@
       "id": 1,
       "name": "session-state-check",
       "prompt": "I'm starting a new Nazca session. What's the current state of the enrichment pipeline?",
-      "expected_output": "Reads the state file at /Users/dannazca/Factory/cohorts/nazca_enrichment_state.json, surfaces all cohorts with their company counts (total, enriched, pending), flags any cohort with pending > 0 as needing action, notes dead sources (Financial Datasets API and Brightdata), and recommends a concrete next action.",
+      "expected_output": "Reads the state file at ~/Factory/cohorts/nazca_enrichment_state.json (or $NAZCA_FACTORY_DIR/cohorts/), surfaces all cohorts with their company counts (total, enriched, pending), flags any cohort with pending > 0 as needing action, notes dead sources (Financial Datasets API and Brightdata), and recommends a concrete next action.",
       "assertions": [
-        "Reads the state file at /Users/dannazca/Factory/cohorts/nazca_enrichment_state.json",
+        "Reads the cohort state file (nazca_enrichment_state.json) from ~/Factory/cohorts/ or $NAZCA_FACTORY_DIR/cohorts/",
         "Surfaces all 4 cohort names: LATAM_IPO, US_IPO, Hot_Startups, Publicas_GUR",
         "Shows company counts (total, enriched, pending) for each cohort",
         "Flags dead sources: Financial Datasets API ($0 balance) and Brightdata (HTTP 401)",
