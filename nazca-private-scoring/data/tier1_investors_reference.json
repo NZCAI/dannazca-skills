@@ -1,0 +1,35 @@
+{
+  "_instructions": "Add investor names exactly as they appear in Harmonic/Pitchbook. Matching is case-insensitive substring. Update when Nazca's investment committee updates the tier lists.",
+  "global_tier1": [
+    "Sequoia", "a16z", "Andreessen Horowitz", "General Atlantic",
+    "Tiger Global", "Insight Partners", "SoftBank", "Coatue",
+    "Accel", "Bessemer", "Lightspeed", "Kleiner Perkins",
+    "Greylock", "Founders Fund", "Benchmark", "Index Ventures",
+    "GV", "Google Ventures", "Khosla", "Emergence Capital"
+  ],
+  "latam_tier1": [
+    "Kaszek", "Monashees", "Softbank LatAm", "DILA Capital",
+    "Quona", "Canary", "Magma Partners", "Ignia",
+    "Valor Capital", "GS Ventures", "Riverwood Capital",
+    "Endeavor Catalyst", "IFC", "ACON Investments"
+  ],
+  "big_tech_companies": [
+    "Google", "Alphabet", "Meta", "Facebook", "Amazon", "Microsoft",
+    "Apple", "Netflix", "Uber", "Airbnb", "Stripe", "Square",
+    "Tesla", "Nvidia", "Salesforce", "Workday", "ServiceNow"
+  ],
+  "latam_unicorns": [
+    "Mercado Libre", "MercadoLibre", "Nubank", "NU", "Stone", "StoneCo",
+    "Kavak", "Rappi", "Cornershop", "Loggi", "Globant",
+    "Creditas", "Gympass", "Nuvemshop", "dLocal", "Pagseguro",
+    "Totvs", "Vtex", "VTEX", "Loft", "QuintoAndar", "Konfio",
+    "Kueski", "Clip", "Clara", "Bitso"
+  ],
+  "public_cos_latam_relevant": [
+    "JPMorgan", "JP Morgan", "Goldman Sachs", "Morgan Stanley",
+    "Bank of America", "Citi", "Citibank", "Wells Fargo",
+    "Itaú", "Itau", "BTG Pactual", "BTG", "Bradesco", "Santander",
+    "BBVA", "Banamex", "Visa", "Mastercard", "MasterCard",
+    "American Express", "Amex", "PayPal", "Block"
+  ]
+}

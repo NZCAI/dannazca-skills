@@ -1,0 +1,31 @@
+{
+  "_source": "LAVCA 2024 + Pitchbook 2025 — manually updated each quarter",
+  "_instructions": "Update sector_phase when new LAVCA/Pitchbook reports are published. Phase definitions: Early (pre-Series A activity dominates), Growth (Series B-C dominant), Late (Series D+ / pre-IPO activity dominant), Mature (IPO/M&A dominant, new investment slowing).",
+  "latam": {
+    "FinTech": "Growth",
+    "ECommerce": "Late",
+    "HealthTech": "Early",
+    "SaaS": "Growth",
+    "Logistics": "Growth",
+    "CleanTech": "Early",
+    "PropTech": "Early",
+    "AIML": "Early",
+    "Marketplace": "Late"
+  },
+  "usa": {
+    "FinTech": "Late",
+    "ECommerce": "Mature",
+    "HealthTech": "Growth",
+    "SaaS": "Late",
+    "Logistics": "Late",
+    "CleanTech": "Growth",
+    "PropTech": "Growth",
+    "AIML": "Growth",
+    "Marketplace": "Mature"
+  },
+  "last_updated": "2026-Q1",
+  "sources": [
+    "LAVCA 2024 Latin America Venture Capital Report",
+    "Pitchbook 2025 Emerging Tech Indicator"
+  ]
+}
